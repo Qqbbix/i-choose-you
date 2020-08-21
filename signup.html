@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Colorlib Templates">
+  <meta name="author" content="Colorlib">
+  <meta name="keywords" content="Colorlib Templates">
+
+  <!-- Title Page-->
+  <title>I-CHOOSE-YOU</title>
+
+  <link rel="icon" href="img/icon/title_dog.png" type="image/x-icon">
+
+
+  <!-- Icons font CSS-->
+  <link href="vendor/1/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+  <link href="vendor/1/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <!-- Font special for pages-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+  <!-- Vendor CSS-->
+  <link href="vendor/1/select2/select2.min.css" rel="stylesheet" media="all">
+  <link href="vendor/1/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+  <!-- Main CSS-->
+  <link href="css/signup_main.css" rel="stylesheet" media="all">
+
+  <!-- Validate -->
+  <script>
+    function validateForm() {
+      var fn = document.forms["myForm"]["firstname"].value;
+      var ln = document.forms["myForm"]["lastname"].value;
+      var em = document.forms["myForm"]["email"].value;
+      var pw = document.forms["myForm"]["password"].value;
+      var ad = document.forms["myForm"]["address"].value;
+      var ph = document.forms["myForm"]["phone"].value;
+      var gd = document.forms["myForm"]["gender"].value;
+      var role = document.forms["myForm"]["role"].value;
+      
+
+      if (fn == "" || ln == "" || em == "" || pw == "" || ad == "" || gd == "" || role == "" || ph == "") {
+        alert("Field must be filled out");
+        return false;
+      }
+      
+    }
+
+    function validEmail(str){
+
+      var dataString = 'email='+ str ;
+
+      $.ajax({
+      type: "POST",
+      url: "check_status.php",
+      data: dataString,
+      cache: false,
+      success: function(result){
+              //  var result=trim(result);
+               if(result=='READY TO USE' && (str.search("@")!=-1 && str.search(".")!=-1)){
+                document.getElementById('status').innerHTML = result;
+                document.getElementById('status').style.color = 'green';
+               }
+               else if(result == "ALREADY USED"){
+                document.getElementById('status').innerHTML = result;
+                document.getElementById('status').style.color = 'red';
+               }
+               else{
+                document.getElementById('status').innerHTML = "";
+               }
+      }
+      });
+}
+  </script>
+</head>
+
+<body>
+  <div class="page-wrapper bg-black p-t-180 p-b-100 font-robo">
+    <div class="wrapper wrapper--w960">
+      <div class="card card-2">
+        <div class="card-heading"></div>
+        <div class="card-body">
+          <h2 class="title">Create Account</h2>
+          <form method="POST" name="myForm" onsubmit="return validateForm()" action="register_insert.php">
+            <div class="row row-space">
+              <div class="col-2">
+                <div class="input-group">
+                  <input class="input--style-2" type="text" placeholder=" First Name" name="firstname">
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="input-group">
+                  <input class="input--style-2" type="text" placeholder="Last Name" name="lastname">
+                </div>
+              </div>
+            </div>
+            <div class="input-group">
+              <input class="input--style-2" type="email" placeholder="E-Mail" name="email" onkeyup="validEmail(this.value)">
+            </div>
+            <h5 class="end_title" style="color: #707070;">
+              Your E-Mail : 
+              <a id="status"></a>
+            </h5>
+            <div class="input-group">
+              <input class="input--style-2" type="password" placeholder="Password" name="password">
+            </div>
+            <div class="input-group">
+              <input class="input--style-2" type="text" placeholder="Address" name="address">
+            </div>
+            <div class="input-group">
+              <input class="input--style-2" type="text" pattern="^0([8|9|6])([0-9]{8}$)" placeholder="Phone Number (10 Digit)" name="phone">
+            </div>
+            <div class="row row-space">
+              <div class="col-2">
+                <div class="input-group">
+                  <div class="rs-select2 js-select-simple select--no-search">
+                    <select name="gender">
+                      <option disabled="disabled" selected="selected">Gender</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row row-space">
+              <div class="col-2">
+                <div class="input-group">
+                  <div class="rs-select2 js-select-simple select--no-search">
+                    <select name="role">
+                      <option disabled="disabled" selected="selected">Register as...</option>
+                      <option>Taker</option>
+                      <option>Caretaker</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-t-30">
+              <button class="btn btn--radius btn--green" type="submit" value="Submit">Submit</button>
+            </div>
+          </form>
+          <br>
+          <h6 class="end_title">Do you have a account? <a href="login.html">login</a></h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jquery JS-->
+  <script src="vendor/1/jquery/jquery.min.js"></script>
+  <!-- Vendor JS-->
+  <script src="vendor/1/select2/select2.min.js"></script>
+  <script src="vendor/1/datepicker/moment.min.js"></script>
+  <script src="vendor/1/datepicker/daterangepicker.js"></script>
+
+  <!-- Main JS-->
+  <script src="js/global.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

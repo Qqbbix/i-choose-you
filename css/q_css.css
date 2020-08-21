@@ -1,0 +1,12 @@
+#Pets {
+    overflow: visible;
+    width: 209px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    color: rgba(100, 100, 100, 1);
+}
+.pointer       { cursor: pointer; }

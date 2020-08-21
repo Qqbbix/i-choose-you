@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="hidden" name = "user_id" value="10007" id = "user_id">
+    <input type="hidden" name = "care_id" value="10008" id = "care_id">
+    <a href="#" onclick="check_contact()"><button>ติดต่อผู้ดูแล</button></a>
+</body>
+</html>
+<script src= "../js/jquery-3.4.1.min.js"></script>
+<script>
+    function check_contact(){
+        var user_id = document.getElementById("user_id").value;
+        var care_id = document.getElementById("care_id").value;
+        var contact_id = user_id+"_"+care_id;
+        alert(contact_id);
+        $.ajax({
+            url:'check_contact.php',
+            type:'POST',
+            data:{user_id:user_id, care_id:care_id, contact_id:contact_id},
+            cache:false,
+            success: function(dataResult){
+                alert(dataResult);
+            }
+        });
+    }
+</script>
